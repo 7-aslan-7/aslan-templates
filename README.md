@@ -1,1 +1,1 @@
-# aslan-templates
+# junior_python

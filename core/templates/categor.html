@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин Мебели</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Магазин Мебели</h2>
+            <ul class="category-list">
+                {% for category in categories %}
+                    <li class="category-item">
+                        <a href="#category{{ category.id }}" class="main-category">{{ category.name }}</a>
+                        <ul class="subcategory-list">
+                            {% for subcategory in category.subcategories.all %}
+                                <li><a href="#subcategory{{ subcategory.id }}">{{ subcategory.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main class="main-content">
+            {% for category in categories %}
+                <div id="category{{ category.id }}" class="category">
+                    <h3>{{ category.name }}</h3>
+                    {% for subcategory in category.subcategories.all %}
+                        <div id="subcategory{{ subcategory.id }}" class="subcategory">
+                            <h4>{{ subcategory.name }}</h4>
+                            <div class="products">
+                                {% for product in subcategory.products.all %}
+                                    <div class="product-card">
+                                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                                        <h5>{{ product.name }}</h5>
+                                        <p>{{ product.price }} $</p>
+                                        <button class="btn-add-to-cart">Добавить в корзину</button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </main>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

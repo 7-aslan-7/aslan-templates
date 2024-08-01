@@ -1,0 +1,41 @@
+<!-- myapp/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-structor">
+        <div class="signup">
+            <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+            <div class="form-holder">
+                <form method="POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    {{ form.username }}
+                    {{ form.email }}
+                    {{ form.password }}
+                    <button class="submit-btn" type="submit">Sign up</button>
+                </form>
+            </div>
+        </div>
+        <div class="login slide-up">
+            <div class="center">
+                <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+                <div class="form-holder">
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {{ login_form.username }}
+                        {{ login_form.password }}
+                        <button class="submit-btn" type="submit">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
